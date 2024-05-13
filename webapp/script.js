@@ -35,23 +35,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
-var db = firebase.firestore();
-
-// Función para guardar la donación en Firestore
-function saveDonation(name, email, text) {
-  db.collection("donations").add({
-    name: name,
-    email: email,
-    text: text,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  })
-  .then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
-    // Aquí puedes realizar acciones adicionales después de guardar la donación, como mostrar un mensaje de éxito
-  })
-  .catch(function(error) {
-    console.error("Error adding document: ", error);
-    // Manejar errores, como mostrar un mensaje de error al usuario
-  });
-}
-

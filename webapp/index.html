@@ -102,6 +102,63 @@
             <p>Contacte: <a href="tel:+346827382718">+346827382718</a><br> <a href="mailto:1920cholliema@iesjoandaustria.org">1920cholliema@iesjoandaustria.org</a></p>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"></script>
+    <script>
+      // Configura Firebase con tu información de proyecto
+      const firebaseConfig = {
+        apiKey: "AIzaSyCb8iJ79GmMCuhHqnXXVkK1_6hGyLBmxnA",
+        authDomain: "foodconnect-bd9bd.firebaseapp.com",
+        projectId: "foodconnect-bd9bd",
+        storageBucket: "foodconnect-bd9bd.appspot.com",
+        messagingSenderId: "610471363565",
+        appId: "1:610471363565:web:e4e1c1b29285c960329de4",
+        measurementId: "G-1RVTD60300"
+      };
+
+      // Inicializa Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Referencia a la base de datos
+      const db = firebase.database();
+
+      document.addEventListener('DOMContentLoaded', function() {
+          const form = document.getElementById('wish-form');
+          const wishList = document.getElementById('wish-list');
+
+          form.addEventListener('submit', function(event) {
+              event.preventDefault();
+              const name = document.getElementById('name').value;
+              const email = document.getElementById('email').value;
+              const text = document.getElementById('wish').value;
+              saveWishToFirebase(name, email, text);
+              form.reset();
+          });
+
+          function saveWishToFirebase(name, email, text) {
+              const newWishRef = db.ref('wishes').push();
+              newWishRef.set({
+                  name: name,
+                  email: email,
+                  text: text
+              });
+          }
+
+          function loadWishesFromFirebase() {
+              db.ref('wishes').on('value', function(snapshot) {
+                  wishList.innerHTML = '';
+                  snapshot.forEach(function(childSnapshot) {
+                      const wish = childSnapshot.val();
+                      const listItem = document.createElement('li');
+                      listItem.innerHTML = `<strong>${wish.name}</strong> (${wish.email}): ${wish.text}`;
+                      wishList.appendChild(listItem);
+                      listItem.style.animation = 'fadeIn 0.5s ease';
+                  });
+              });
+          }
+
+          loadWishesFromFirebase();
+      });
+    </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ header {
     background-color: #ffbf8a;
     color: white;
     padding: 20px;
-    text-align: center;
+    text-align: right;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -22,22 +22,28 @@ h1 {
     align-self: flex-start;
 }
 
-nav ul {
-    margin: 0;
-    padding: 0;
-}
-
 nav ul li {
     display: inline;
-    margin-left: 20px;
+    margin-left: 10px;
     text-align: center;
 }
 
 nav ul li a {
-    color: #000000;
-    font-size: 20px;
-    text-decoration: none;
+    color: rgb(0, 0, 0); 
+    font-size: 12px;
+    text-decoration:solid;
+    padding: 9px 9px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: 0.3s ease; 
 }
+
+nav ul li a:hover {
+    width: 100%;
+    background-color:#ffbf8a; 
+}
+
 
 main {
     padding: 10px;
@@ -121,14 +127,16 @@ ul, ol {
 .ciudades {
     text-align: center;
 }
-
+.nav{
+    font-size: 8px;
+}
 li {
     border: 1px solid #ccc;
     padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
+    margin-bottom: 12px;
+    border-radius: 8px;
     background-color: #ffefdb;
-    font-size: 28px;
+    font-size: 20px;
 }
 
 footer {
